@@ -1,8 +1,8 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
+var Enemy = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.speed = Math.floor(Math.random() * Math.floor(300));
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -14,6 +14,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x + this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -25,11 +26,53 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+var Player = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/char-horn-girl.png';
+}
+
+Player.prototype.update = function(dt) {
+    // ??
+}
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.handleInput = function(allowedKeys) {
+  switch(allowedKeys) {
+    case 'left':
+      if (this.x > 0) {
+        this.x = this.x - 101;
+      }
+      break;
+    case 'up':
+      if (this.y > 0) {
+        this.y = this.y - 85;
+      }
+      break;
+    case 'right':
+      if (this.x < 400) {
+        this.x = this.x + 101;
+      }
+      break;
+    case 'down':
+      if (this.y < 400) {
+        this.y = this.y + 85;
+      }
+      break;
+  }
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+let enemy1 = new Enemy(-400, 50);
+let enemy2 = new Enemy(-350, 130);
+let enemy3 = new Enemy(-100, 200);
+let allEnemies = [enemy1, enemy2, enemy3];
+let player = new Player(200, 400);
 
 
 // This listens for key presses and sends the keys to your
