@@ -15,6 +15,11 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + this.speed * dt;
+    // Reset enemy position if moved off canvas
+    if (this.x > 600) {
+      this.x = -200;
+      this.x = this.x + this.speed * dt;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -71,7 +76,8 @@ Player.prototype.handleInput = function(allowedKeys) {
 let enemy1 = new Enemy(-400, 50);
 let enemy2 = new Enemy(-350, 130);
 let enemy3 = new Enemy(-100, 200);
-let allEnemies = [enemy1, enemy2, enemy3];
+let enemy4 = new Enemy(-620, 90);
+let allEnemies = [enemy1, enemy2, enemy3, enemy4];
 let player = new Player(200, 400);
 
 
