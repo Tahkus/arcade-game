@@ -1,36 +1,36 @@
-// Enemies our player must avoid
+// Enemy class
 var Enemy = function(x, y) {
     this.x = x;
     this.y = y;
     this.speed = Math.floor(Math.random() * Math.floor(300));
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
 };
 
-// Update the enemy's position, required method for game
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // Set speed of enemy movement
     this.x = this.x + this.speed * dt;
     // Reset enemy position if moved off canvas
     if (this.x > 600) {
-      this.x = -200;
+      this.x = -100;
       this.x = this.x + this.speed * dt;
     }
+    // Collision
+    if (this.x >= player.x - 50 &&
+        this.x <= player.x + 50 &&
+        this.y >= player.y - 50 &&
+        this.y <= player.y + 50) {
+          player.reset();
+        }
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+// Player class
 var Player = function(x, y) {
     this.x = x;
     this.y = y;
@@ -70,14 +70,20 @@ Player.prototype.handleInput = function(allowedKeys) {
   }
 }
 
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 400;
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let enemy1 = new Enemy(-400, 50);
 let enemy2 = new Enemy(-350, 130);
-let enemy3 = new Enemy(-100, 200);
+let enemy3 = new Enemy(-100, 220);
 let enemy4 = new Enemy(-620, 90);
-let allEnemies = [enemy1, enemy2, enemy3, enemy4];
+let enemy5 = new Enemy(-500, 170);
+let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 let player = new Player(200, 400);
 
 
