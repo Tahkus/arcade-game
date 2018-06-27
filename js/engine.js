@@ -154,6 +154,10 @@ var Engine = (function(global) {
         });
 
         player.render();
+        /* Loop through the allLives array to render the hearts */
+        allLives.forEach(function(life) {
+            life.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -174,7 +178,8 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-horn-girl.png'
+        'images/char-horn-girl.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 

@@ -16,12 +16,13 @@ Enemy.prototype.update = function(dt) {
       this.x = -100;
       this.x = this.x + this.speed * dt;
     }
-    // Collision
+    // Collision: reset player & remove life
     if (this.x >= player.x - 50 &&
         this.x <= player.x + 50 &&
         this.y >= player.y - 50 &&
         this.y <= player.y + 50) {
           player.reset();
+          allLives.pop();
         }
 };
 
@@ -75,9 +76,22 @@ Player.prototype.reset = function() {
     this.y = 400;
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Hearts (lives)
+var Life = function(x, y) {
+    this.sprite = 'images/Heart.png';
+    this.x = x;
+    this.y = y;
+}
+
+Life.prototype.update = function(dt) {
+
+}
+
+Life.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 30, 45);
+}
+
+// Enemies & Player created
 let enemy1 = new Enemy(-400, 50);
 let enemy2 = new Enemy(-350, 130);
 let enemy3 = new Enemy(-100, 220);
@@ -86,6 +100,13 @@ let enemy5 = new Enemy(-500, 170);
 let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 let player = new Player(200, 400);
 
+// Hearts (lives) created
+let life1 = new Life(5, 540);
+let life2 = new Life(35, 540);
+let life3 = new Life(65, 540);
+let life4 = new Life(95, 540);
+let life5 = new Life(125, 540);
+let allLives = [life1, life2, life3, life4, life5];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
