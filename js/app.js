@@ -1,3 +1,7 @@
+// Global variables
+const popup = document.querySelector('.modal');
+let lives = 5;
+
 // Enemy class
 var Enemy = function(x, y) {
     this.x = x;
@@ -23,6 +27,8 @@ Enemy.prototype.update = function(dt) {
         this.y <= player.y + 50) {
           player.reset();
           allLives.pop();
+          lives = lives - 1;
+          gameOver();
         }
 };
 
@@ -84,7 +90,7 @@ var Life = function(x, y) {
 }
 
 Life.prototype.update = function(dt) {
-
+  //??
 }
 
 Life.prototype.render = function() {
@@ -107,6 +113,26 @@ let life3 = new Life(65, 540);
 let life4 = new Life(95, 540);
 let life5 = new Life(125, 540);
 let allLives = [life1, life2, life3, life4, life5];
+
+// Other functions
+
+function gameOver() {
+  if (lives === 0) {
+      let modal = document.createElement('p');
+      let modalButton = document.createElement('button');
+      modal.innerHTML = '<p><strong>Game Over!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
+      modal.classList.add('popup-text');
+      modalButton.classList.add('play-button');
+      modalButton.textContent = 'Try Again';
+      popup.appendChild(modal);
+      popup.appendChild(modalButton);
+      modalButton.onclick = function(){
+        popup.removeChild(modal);
+        popup.removeChild(modalButton);
+      }
+  }
+}
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
