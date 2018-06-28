@@ -117,22 +117,26 @@ let allLives = [life1, life2, life3, life4, life5];
 // Other functions
 
 function gameOver() {
-  if (lives === 0) {
-      let modal = document.createElement('p');
-      let modalButton = document.createElement('button');
-      modal.innerHTML = '<p><strong>Game Over!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
-      modal.classList.add('popup-text');
-      modalButton.classList.add('play-button');
-      modalButton.textContent = 'Try Again';
-      popup.appendChild(modal);
-      popup.appendChild(modalButton);
-      modalButton.onclick = function(){
-        popup.removeChild(modal);
-        popup.removeChild(modalButton);
-      }
-  }
+    if (lives === 0) {
+        let modal = document.createElement('p');
+        let modalButton = document.createElement('button');
+        modal.innerHTML = '<p><strong>Game Over!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
+        modal.classList.add('popup-text');
+        modalButton.classList.add('play-button');
+        modalButton.textContent = 'Try Again';
+        popup.appendChild(modal);
+        popup.appendChild(modalButton);
+        modalButton.onclick = function(){
+          popup.removeChild(modal);
+          popup.removeChild(modalButton);
+          resetGame();
+        }
+    }
 }
-
+ function resetGame() {
+    allLives = [life1, life2, life3, life4, life5];
+    lives = 5;
+ }
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
