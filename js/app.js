@@ -89,13 +89,44 @@ var Life = function(x, y) {
     this.y = y;
 }
 
-Life.prototype.update = function(dt) {
-  //??
-}
-
 Life.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 30, 45);
 }
+
+// Gems for collection
+var Gem = function(x, y) {
+    this.sprite = 'images/Gem Blue.png';
+    this.x = x;
+    this.y = y;
+}
+
+Gem.prototype.update = function(dt) {
+  //??
+}
+
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 50);
+}
+
+// Gems created
+let gem1 = new Gem(30, 140);
+let gem2 = new Gem(30, 225);
+let gem3 = new Gem(30, 308);
+let gem4 = new Gem(130, 140);
+let gem5 = new Gem(130, 225);
+let gem6 = new Gem(130, 308);
+let gem7 = new Gem(230, 140);
+let gem8 = new Gem(230, 225);
+let gem9 = new Gem(230, 308);
+let gem10 = new Gem(330, 140);
+let gem11 = new Gem(330, 225);
+let gem12 = new Gem(330, 308);
+let gem13 = new Gem(430, 140);
+let gem14 = new Gem(430, 225);
+let gem15 = new Gem(430, 308);
+let allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
+                gem8, gem9, gem10, gem11, gem12, gem13,
+                gem14, gem15]
 
 // Enemies & Player created
 let enemy1 = new Enemy(-400, 50);
@@ -113,6 +144,8 @@ let life3 = new Life(65, 540);
 let life4 = new Life(95, 540);
 let life5 = new Life(125, 540);
 let allLives = [life1, life2, life3, life4, life5];
+
+
 
 // Other functions
 

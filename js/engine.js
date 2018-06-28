@@ -146,18 +146,21 @@ var Engine = (function(global) {
      * on your enemy and player entities within app.js
      */
     function renderEntities() {
-        /* Loop through all of the objects within the allEnemies array and call
-         * the render function you have defined.
-         */
+
+        allGems.forEach(function(gem) {
+            gem.render();
+        });
+
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
         player.render();
-        /* Loop through the allLives array to render the hearts */
+
         allLives.forEach(function(life) {
             life.render();
         });
+
     }
 
     /* This function does nothing but it could have been a good place to
@@ -179,7 +182,8 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-horn-girl.png',
-        'images/Heart.png'
+        'images/Heart.png',
+        'images/Gem Blue.png'
     ]);
     Resources.onReady(init);
 
