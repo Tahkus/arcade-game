@@ -1,6 +1,7 @@
 // Global variables
 const popup = document.querySelector('.modal');
 let lives = 5;
+let gems = 0;
 
 // Enemy class
 var Enemy = function(x, y) {
@@ -101,7 +102,14 @@ var Gem = function(x, y) {
 }
 
 Gem.prototype.update = function(dt) {
-  //??
+  // Collect gem
+    if (this.x === player.x &&
+        this.x === player.x &&
+        this.y === player.y &&
+        this.y === player.y) {
+          allGems.pop();
+          gems = gems + 1;
+        }
 }
 
 Gem.prototype.render = function() {
@@ -126,7 +134,7 @@ let gem14 = new Gem(430, 225);
 let gem15 = new Gem(430, 308);
 let allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
                 gem8, gem9, gem10, gem11, gem12, gem13,
-                gem14, gem15]
+                gem14, gem15];
 
 // Enemies & Player created
 let enemy1 = new Enemy(-400, 50);
@@ -153,7 +161,7 @@ function gameOver() {
     if (lives === 0) {
         let modal = document.createElement('p');
         let modalButton = document.createElement('button');
-        modal.innerHTML = '<p><strong>Game Over!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
+        modal.innerHTML = '<p><strong>GAME OVER!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
         modal.classList.add('popup-text');
         modalButton.classList.add('play-button');
         modalButton.textContent = 'Try Again';
@@ -166,9 +174,33 @@ function gameOver() {
         }
     }
 }
+
+function winGame() {
+    if (gems === 15) {
+        let modal = document.createElement('p');
+        let modalButton = document.createElement('button');
+        modal.innerHTML = '<p><strong>CONGRATULATIONS, YOU WON!</strong><br>You outsmarted the beetles and collected all the gems! Would you like to play again?</p>';
+        modal.classList.add('popup-text');
+        modalButton.classList.add('play-button');
+        modalButton.textContent = 'Play Again';
+        popup.appendChild(modal);
+        popup.appendChild(modalButton);
+        modalButton.onclick = function(){
+          popup.removeChild(modal);
+          popup.removeChild(modalButton);
+          resetGame();
+        }
+    }
+}
+
  function resetGame() {
     allLives = [life1, life2, life3, life4, life5];
     lives = 5;
+    allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
+                    gem8, gem9, gem10, gem11, gem12, gem13,
+                    gem14, gem15];
+    gems = 0;
+
  }
 
 // This listens for key presses and sends the keys to your
