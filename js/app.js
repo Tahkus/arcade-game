@@ -116,6 +116,9 @@ Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 50);
 }
 
+// Create gem collection counter
+
+
 // Gems created
 let gem1 = new Gem(30, 140);
 let gem2 = new Gem(30, 225);
@@ -153,6 +156,9 @@ let life4 = new Life(95, 540);
 let life5 = new Life(125, 540);
 let allLives = [life1, life2, life3, life4, life5];
 
+// Gem for score panel
+let gem16 = new Gem(360, 530);
+let gem = [gem16];
 
 
 // Other functions

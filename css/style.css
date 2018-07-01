@@ -1,5 +1,7 @@
 body {
     text-align: center;
+    font-family: Arial Black; 
+    font-size: 18px;
 }
 
 .container {
@@ -8,6 +10,14 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+.gem-counter {
+    position: relative;
+    top: 595px;
+    left: 190px;
+    color: #1241eb;;
+}
+
 
 .modal {
   background: #6377de;
