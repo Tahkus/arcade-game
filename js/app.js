@@ -1,7 +1,7 @@
 // Global variables
 const popup = document.querySelector('.modal');
 let lives = 5;
-let gems = 0;
+let gemCount = 0;
 
 // Enemy class
 var Enemy = function(x, y) {
@@ -103,13 +103,14 @@ var Gem = function(x, y) {
 
 Gem.prototype.update = function(dt) {
   // Collect gem
-    if (this.x === player.x &&
-        this.x === player.x &&
-        this.y === player.y &&
-        this.y === player.y) {
-          allGems.pop();
-          gems = gems + 1;
-        }
+    if (player.x < this.x + 40 &&
+        this.x < player.x + 40 &&
+        player.y < this.y + 40 &&
+        this.y < player.y + 40) {
+          allGems.splice(allGems.indexOf(this), 1);
+          gemCount++;
+          gemCounter();
+          winGame();        }
 }
 
 Gem.prototype.render = function() {
@@ -182,7 +183,7 @@ function gameOver() {
 }
 
 function winGame() {
-    if (gems === 15) {
+    if (gemCount === 15) {
         let modal = document.createElement('p');
         let modalButton = document.createElement('button');
         modal.innerHTML = '<p><strong>CONGRATULATIONS, YOU WON!</strong><br>You outsmarted the beetles and collected all the gems! Would you like to play again?</p>';
@@ -205,8 +206,14 @@ function winGame() {
     allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
                     gem8, gem9, gem10, gem11, gem12, gem13,
                     gem14, gem15];
-    gems = 0;
+    gemCount = 0;
+    gemCounter();
+    player.reset();
+ }
 
+ function gemCounter() {
+    let count = document.querySelector('.gems');
+    count.textContent = gemCount;
  }
 
 // This listens for key presses and sends the keys to your
