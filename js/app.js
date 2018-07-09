@@ -104,9 +104,9 @@ var Gem = function(x, y) {
 Gem.prototype.update = function(dt) {
   // Collect gem
     if (player.x < this.x + 40 &&
-        this.x < player.x + 40 &&
-        player.y < this.y + 40 &&
-        this.y < player.y + 40) {
+        player.x + 101 > this.x &&
+        player.y < this.y &&
+        player.y + 85 > this.y) {
           allGems.splice(allGems.indexOf(this), 1);
           gemCount++;
           gemCounter();
