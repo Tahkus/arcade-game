@@ -15,5 +15,5 @@ Beat the Beetles!
 
 ## Author
 
-This game was made by Tahkus Allen based the game engine provided by Udacity as part of the Front-End Web Developer Nanodegree.
+This game was made by Tahkus Allen based on the game engine provided by Udacity as part of the Front-End Web Developer Nanodegree.
 

@@ -18,18 +18,18 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + this.speed * dt;
     // Reset enemy position if moved off canvas
     if (this.x > 600) {
-      this.x = -100;
-      this.x = this.x + this.speed * dt;
+        this.x = -100;
+        this.x = this.x + this.speed * dt;
     }
     // Collision: reset player & remove life
     if (this.x >= player.x - 50 &&
         this.x <= player.x + 50 &&
         this.y >= player.y - 50 &&
         this.y <= player.y + 50) {
-          player.reset();
-          allLives.pop();
-          lives = lives - 1;
-          gameOver();
+            player.reset();
+            allLives.pop();
+            lives = lives - 1;
+            gameOver();
         }
 };
 
@@ -43,10 +43,12 @@ var Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-horn-girl.png';
-}
+};
 
+// Update the enemy's position
+// Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    // ??
+    setTimeout(drown, 1000);
 }
 
 Player.prototype.render = function() {
@@ -200,7 +202,7 @@ function winGame() {
     }
 }
 
- function resetGame() {
+function resetGame() {
     allLives = [life1, life2, life3, life4, life5];
     lives = 5;
     allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
@@ -211,7 +213,16 @@ function winGame() {
     player.reset();
  }
 
- function gemCounter() {
+function drown() {
+    if (player.y < 50) {
+        player.reset();
+        allLives.pop();
+        lives = lives - 1;
+        gameOver();
+    }
+}
+
+function gemCounter() {
     let count = document.querySelector('.gems');
     count.textContent = gemCount;
  }
