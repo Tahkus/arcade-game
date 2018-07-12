@@ -49,12 +49,14 @@ var Player = function(x, y) {
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
     setTimeout(drown, 1000);
-}
+};
 
+// Draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
+// Add movement controls for player
 Player.prototype.handleInput = function(allowedKeys) {
   switch(allowedKeys) {
     case 'left':
@@ -78,49 +80,49 @@ Player.prototype.handleInput = function(allowedKeys) {
       }
       break;
   }
-}
+};
 
+// Reset position of player 
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
-}
+};
 
-// Hearts (lives)
+// Hearts (lives) class
 var Life = function(x, y) {
     this.sprite = 'images/Heart.png';
     this.x = x;
     this.y = y;
-}
+};
 
+// Draw lives on screen
 Life.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 30, 45);
-}
+};
 
 // Gems for collection
 var Gem = function(x, y) {
     this.sprite = 'images/Gem Blue.png';
     this.x = x;
     this.y = y;
-}
+};
 
+// Update gems when collected by player
 Gem.prototype.update = function(dt) {
-  // Collect gem
     if (player.x < this.x + 40 &&
         player.x + 101 > this.x &&
         player.y < this.y &&
         player.y + 85 > this.y) {
-          allGems.splice(allGems.indexOf(this), 1);
-          gemCount++;
-          gemCounter();
-          winGame();        }
-}
+            allGems.splice(allGems.indexOf(this), 1);
+            gemCount++;
+            gemCounter();
+            winGame();        }
+};
 
+// Draw gems on screen
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 40, 50);
-}
-
-// Create gem collection counter
-
+};
 
 // Gems created
 let gem1 = new Gem(30, 140);
@@ -159,13 +161,14 @@ let life4 = new Life(95, 540);
 let life5 = new Life(125, 540);
 let allLives = [life1, life2, life3, life4, life5];
 
-// Gem for score panel
+// Gem for score panel created
 let gem16 = new Gem(360, 530);
 let gem = [gem16];
 
 
-// Other functions
+// OTHER FUNCTION
 
+// Game over 
 function gameOver() {
     if (lives === 0) {
         let modal = document.createElement('p');
@@ -177,13 +180,14 @@ function gameOver() {
         popup.appendChild(modal);
         popup.appendChild(modalButton);
         modalButton.onclick = function(){
-          popup.removeChild(modal);
-          popup.removeChild(modalButton);
-          resetGame();
+            popup.removeChild(modal);
+            popup.removeChild(modalButton);
+            resetGame();
         }
     }
-}
+};
 
+// Winning game 
 function winGame() {
     if (gemCount === 15) {
         let modal = document.createElement('p');
@@ -195,24 +199,25 @@ function winGame() {
         popup.appendChild(modal);
         popup.appendChild(modalButton);
         modalButton.onclick = function(){
-          popup.removeChild(modal);
-          popup.removeChild(modalButton);
-          resetGame();
+            popup.removeChild(modal);
+            popup.removeChild(modalButton);
+            resetGame();
         }
     }
-}
+};
 
+// Reset the game 
 function resetGame() {
     allLives = [life1, life2, life3, life4, life5];
     lives = 5;
-    allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7,
-                    gem8, gem9, gem10, gem11, gem12, gem13,
-                    gem14, gem15];
+    allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8, 
+              gem9, gem10, gem11, gem12, gem13, gem14, gem15];
     gemCount = 0;
     gemCounter();
     player.reset();
- }
+};
 
+// Player drowns if enters the water
 function drown() {
     if (player.y < 50) {
         player.reset();
@@ -220,12 +225,13 @@ function drown() {
         lives = lives - 1;
         gameOver();
     }
-}
+};
 
+// Changes gem count text
 function gemCounter() {
     let count = document.querySelector('.gems');
     count.textContent = gemCount;
- }
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
