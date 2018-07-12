@@ -173,7 +173,7 @@ function gameOver() {
     if (lives === 0) {
         let modal = document.createElement('p');
         let modalButton = document.createElement('button');
-        modal.innerHTML = '<p><strong>GAME OVER!</strong><br>The bugs killed you too many times!<br> Would you like to try again?</p>';
+        modal.innerHTML = '<p><strong>GAME OVER!</strong><br>The bugs killed you too many times, or you drowned in the water!<br> Would you like to try again?</p>';
         modal.classList.add('popup-text');
         modalButton.classList.add('play-button');
         modalButton.textContent = 'Try Again';
