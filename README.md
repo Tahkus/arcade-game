@@ -3,12 +3,15 @@ Gem-Snatch
 
 ## How to Play
 
+You can play Gem-Snatch [HERE](https://tahkus.github.io/gem-snatch/).
+
+Here are some tips for playing:
+
 * Move the player using the arrow keys.
 * Snatch up all 15 gems to win the game.
 * Avoid getting hit by the beetles, as you will be crushed and lose a life if you do!
 * Do not go in the water, as you will drown and lose a life!
 * If all 5 lives are lost the game is over.
-
 
 ## Installation
 
