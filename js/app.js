@@ -1,3 +1,5 @@
+"use strict";
+
 // Global variables
 const popup = document.querySelector('.modal');
 let lives = 5;
