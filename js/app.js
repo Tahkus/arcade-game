@@ -2,8 +2,6 @@
 
 // Global variables
 const popup = document.querySelector('.modal');
-let lives = 5;
-let gemCount = 0;
 
 // Enemy class
 var Enemy = function(x, y) {
@@ -26,11 +24,11 @@ Enemy.prototype.update = function(dt) {
     //Collision: reset player & remove life
     if (this.x < player.x + 80 &&
         this.x + 80 > player.x &&
-        this.y < player.y + 80 &&
-        this.y + 80 > player.y) {
+        this.y < player.y + 70 &&
+        this.y + 70 > player.y) {
             player.reset();
             allLives.pop();
-            lives = lives - 1;
+            player.lives = player.lives - 1;
             gameOver();
 
     }
@@ -43,6 +41,8 @@ Enemy.prototype.render = function() {
 
 // Player class
 var Player = function(x, y) {
+    this.lives = 5;
+    this.gemCount = 0;
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-horn-girl.png';
@@ -117,7 +117,7 @@ Gem.prototype.update = function(dt) {
         player.y < this.y &&
         player.y + 85 > this.y) {
             allGems.splice(allGems.indexOf(this), 1);
-            gemCount++;
+            player.gemCount++;
             gemCounter();
             winGame();        }
 };
@@ -173,7 +173,7 @@ let gem = [gem16];
 
 // Game over 
 function gameOver() {
-    if (lives === 0) {
+    if (player.lives === 0) {
         let modal = document.createElement('p');
         let modalButton = document.createElement('button');
         modal.innerHTML = '<p><strong>GAME OVER!</strong><br>The bugs killed you too many times, or you drowned in the water!<br> Would you like to try again?</p>';
@@ -192,7 +192,7 @@ function gameOver() {
 
 // Winning game 
 function winGame() {
-    if (gemCount === 15) {
+    if (player.gemCount === 15) {
         let modal = document.createElement('p');
         let modalButton = document.createElement('button');
         modal.innerHTML = '<p><strong>CONGRATULATIONS, YOU WON!</strong><br>You outsmarted the beetles and collected all the gems! Would you like to play again?</p>';
@@ -212,10 +212,10 @@ function winGame() {
 // Reset the game 
 function resetGame() {
     allLives = [life1, life2, life3, life4, life5];
-    lives = 5;
+    player.lives = 5;
     allGems = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8, 
               gem9, gem10, gem11, gem12, gem13, gem14, gem15];
-    gemCount = 0;
+    player.gemCount = 0;
     gemCounter();
     player.reset();
 };
@@ -225,7 +225,7 @@ function drown() {
     if (player.y < 50) {
         player.reset();
         allLives.pop();
-        lives = lives - 1;
+        player.lives = player.lives - 1;
         gameOver();
     }
 };
@@ -233,7 +233,7 @@ function drown() {
 // Changes gem count text
 function gemCounter() {
     let count = document.querySelector('.gems');
-    count.textContent = gemCount;
+    count.textContent = player.gemCount;
 };
 
 // This listens for key presses and sends the keys to your
