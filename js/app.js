@@ -51,7 +51,8 @@ var Player = function(x, y) {
 // Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-    setTimeout(drown, 1000);
+/*    setTimeout(drown, 1000);
+*/
 };
 
 // Draw the player on the screen
@@ -65,21 +66,25 @@ Player.prototype.handleInput = function(allowedKeys) {
     case 'left':
       if (this.x > 0) {
         this.x = this.x - 101;
+        drown();
       }
       break;
     case 'up':
       if (this.y > 0) {
         this.y = this.y - 85;
+        drown();
       }
       break;
     case 'right':
       if (this.x < 400) {
         this.x = this.x + 101;
+        drown();
       }
       break;
     case 'down':
       if (this.y < 400) {
         this.y = this.y + 85;
+        drown();
       }
       break;
   }
