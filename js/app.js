@@ -23,16 +23,17 @@ Enemy.prototype.update = function(dt) {
         this.x = -100;
         this.x = this.x + this.speed * dt;
     }
-    // Collision: reset player & remove life
-    if (this.x >= player.x - 50 &&
-        this.x <= player.x + 50 &&
-        this.y >= player.y - 50 &&
-        this.y <= player.y + 50) {
+    //Collision: reset player & remove life
+    if (this.x < player.x + 80 &&
+        this.x + 80 > player.x &&
+        this.y < player.y + 80 &&
+        this.y + 80 > player.y) {
             player.reset();
             allLives.pop();
             lives = lives - 1;
             gameOver();
-        }
+
+    }
 };
 
 // Draw the enemy on the screen
