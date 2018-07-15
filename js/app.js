@@ -48,13 +48,6 @@ var Player = function(x, y) {
     this.sprite = 'images/char-horn-girl.png';
 };
 
-// Update the enemy's position
-// Parameter: dt, a time delta between ticks
-Player.prototype.update = function(dt) {
-/*    setTimeout(drown, 1000);
-*/
-};
-
 // Draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -66,25 +59,25 @@ Player.prototype.handleInput = function(allowedKeys) {
     case 'left':
       if (this.x > 0) {
         this.x = this.x - 101;
-        drown();
+        player.drown();
       }
       break;
     case 'up':
       if (this.y > 0) {
         this.y = this.y - 85;
-        drown();
+        player.drown();
       }
       break;
     case 'right':
       if (this.x < 400) {
         this.x = this.x + 101;
-        drown();
+        player.drown();
       }
       break;
     case 'down':
       if (this.y < 400) {
         this.y = this.y + 85;
-        drown();
+        player.drown();
       }
       break;
   }
@@ -94,6 +87,18 @@ Player.prototype.handleInput = function(allowedKeys) {
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
+};
+
+// Player drowns if enters the water
+Player.prototype.drown = function() {
+    if (this.y < 50) {
+        setTimeout (() => {
+            player.reset();
+            allLives.pop();
+            player.lives = player.lives - 1;
+            gameOver();
+        }, 500);
+    }
 };
 
 // Hearts (lives) class
@@ -116,7 +121,7 @@ var Gem = function(x, y) {
 };
 
 // Update gems when collected by player
-Gem.prototype.update = function(dt) {
+Gem.prototype.update = function() {
     if (player.x < this.x + 40 &&
         player.x + 101 > this.x &&
         player.y < this.y &&
@@ -223,16 +228,6 @@ function resetGame() {
     player.gemCount = 0;
     gemCounter();
     player.reset();
-};
-
-// Player drowns if enters the water
-function drown() {
-    if (player.y < 50) {
-        player.reset();
-        allLives.pop();
-        player.lives = player.lives - 1;
-        gameOver();
-    }
 };
 
 // Changes gem count text
