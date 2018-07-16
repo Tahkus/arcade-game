@@ -59,25 +59,25 @@ Player.prototype.handleInput = function(allowedKeys) {
     case 'left':
       if (this.x > 0) {
         this.x = this.x - 101;
-        player.drown();
+        this.drown();
       }
       break;
     case 'up':
       if (this.y > 0) {
         this.y = this.y - 85;
-        player.drown();
+        this.drown();
       }
       break;
     case 'right':
       if (this.x < 400) {
         this.x = this.x + 101;
-        player.drown();
+        this.drown();
       }
       break;
     case 'down':
       if (this.y < 400) {
         this.y = this.y + 85;
-        player.drown();
+        this.drown();
       }
       break;
   }
@@ -93,9 +93,9 @@ Player.prototype.reset = function() {
 Player.prototype.drown = function() {
     if (this.y < 50) {
         setTimeout (() => {
-            player.reset();
+            this.reset();
             allLives.pop();
-            player.lives = player.lives - 1;
+            this.lives = this.lives - 1;
             gameOver();
         }, 500);
     }
