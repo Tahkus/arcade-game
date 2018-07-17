@@ -3,12 +3,21 @@
 // Global variables
 const popup = document.querySelector('.modal');
 
-// Enemy class
-var Enemy = function(x, y) {
-    this.x = x;
-    this.y = y;
-    this.speed = Math.floor(Math.random() * Math.floor(300));
-    this.sprite = 'images/enemy-bug.png';
+// Superclass of character
+class Character {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+// Enemy subclass
+class Enemy extends Character {
+    constructor(x, y, sprite = 'images/enemy-bug.png') {
+        super(x, y);
+        this.sprite = sprite;
+        this.speed = Math.floor(Math.random() * Math.floor(300));
+    }
 };
 
 // Update the enemy's position
@@ -39,13 +48,14 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Player class
-var Player = function(x, y) {
-    this.lives = 5;
-    this.gemCount = 0;
-    this.x = x;
-    this.y = y;
-    this.sprite = 'images/char-horn-girl.png';
+// Player subclass
+class Player extends Character {
+    constructor(x, y, sprite = 'images/char-horn-girl.png') {
+        super(x, y);
+        this.lives = 5;
+        this.gemCount = 0;
+        this.sprite = sprite;
+    }
 };
 
 // Draw the player on the screen
@@ -101,11 +111,12 @@ Player.prototype.drown = function() {
     }
 };
 
-// Hearts (lives) class
-var Life = function(x, y) {
-    this.sprite = 'images/Heart.png';
-    this.x = x;
-    this.y = y;
+// Hearts (lives) subclass
+class Life extends Character {
+    constructor(x, y, sprite = 'images/Heart.png') {
+        super(x, y);
+        this.sprite = sprite;
+    }
 };
 
 // Draw lives on screen
@@ -113,11 +124,12 @@ Life.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 30, 45);
 };
 
-// Gems for collection
-var Gem = function(x, y) {
-    this.sprite = 'images/Gem Blue.png';
-    this.x = x;
-    this.y = y;
+// Gems for collection subclass
+class Gem extends Character {
+    constructor(x, y, sprite = 'images/Gem Blue.png') {
+        super(x, y);
+        this.sprite = sprite;
+    }
 };
 
 // Update gems when collected by player
